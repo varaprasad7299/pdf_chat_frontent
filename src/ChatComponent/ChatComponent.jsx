@@ -62,7 +62,23 @@ const ChatComponent = ({setStage,setFile,filename,setFileName}) => {
                 console.error('There was a problem with the fetch operation:', error);
             });
     }
-   const handleClick = ()=>{
+   const handleClick = async()=>{
+
+    await fetch(`http://localhost:5000/delete?reference=${filename}`)
+    .then(response => {
+        if (!response.ok) {
+        throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(data => {
+       console.error(data)
+    })
+    .catch(error => {
+        // Handle errors
+        console.error('There was a problem with the delete operation:', error);
+    });
+
         const initialMessage = [{
         message: "Hello Ask Me Question About the Pdf",
         sender: "AI",
@@ -76,6 +92,23 @@ const ChatComponent = ({setStage,setFile,filename,setFileName}) => {
         
        
    }
+   window.addEventListener('beforeunload', async function (e) {
+    // Send a request to server to delete the file
+    await fetch(`http://localhost:5000/delete?reference=${filename}`)
+    .then(response => {
+        if (!response.ok) {
+        throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(data => {
+       console.error(data)
+    })
+    .catch(error => {
+        // Handle errors
+        console.error('There was a problem with the delete operation:', error);
+    });
+  })
   return (
     <>
     <p className='newChat' onClick={handleClick}><button>New Chat</button></p>

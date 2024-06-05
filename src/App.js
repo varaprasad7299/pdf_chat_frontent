@@ -30,6 +30,7 @@ function App() {
  
   const removeFile = (fileName)=>{
     setFile(null)
+    setFileName("")
   }
   
 

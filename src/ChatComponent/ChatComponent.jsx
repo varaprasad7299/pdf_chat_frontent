@@ -2,6 +2,8 @@ import React from 'react'
 import './ChatComponent.css'
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css'
 import {MainContainer,ChatContainer,MessageList,Message,MessageInput,TypingIndicator} from '@chatscope/chat-ui-kit-react'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState,useEffect } from 'react';
 
 
@@ -16,7 +18,7 @@ const ChatComponent = ({setStage,setFile,filename,setFileName}) => {
       }]
     });
     const [typing,setTyping] = useState(false)
-
+    const [spin,setSpin] = useState(0)
     useEffect(() => {
       // Store the chat history in sessionStorage whenever it changes
       sessionStorage.setItem('chatHistory', JSON.stringify(messages));
@@ -63,19 +65,22 @@ const ChatComponent = ({setStage,setFile,filename,setFileName}) => {
             });
     }
    const handleClick = async()=>{
-
+    setSpin(1)
     await fetch(`https://pdf-chat-g5tg.onrender.com/delete?reference=${filename}`)
     .then(response => {
         if (!response.ok) {
         throw new Error('Network response was not ok');
         }
+
         return response.text();
     })
     .then(data => {
+       setSpin(0)
        console.error(data)
     })
     .catch(error => {
         // Handle errors
+        setSpin(0)
         console.error('There was a problem with the delete operation:', error);
     });
 
@@ -111,7 +116,7 @@ const ChatComponent = ({setStage,setFile,filename,setFileName}) => {
   })
   return (
     <>
-    <p className='newChat' onClick={handleClick}><button>New Chat</button></p>
+    <p className='newChat' onClick={handleClick}><button>New Chat {spin===1 && <FontAwesomeIcon icon={faSpinner} className='fa-spin'/>}</button></p>
     <div className='container'>
        <MainContainer>
           <ChatContainer>

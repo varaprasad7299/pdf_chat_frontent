@@ -28,6 +28,7 @@ const SubmitButton = ({stage,file,setStage}) => {
         })
         .catch(error => {
             console.error('There was a problem with the file upload:', error);
+            alert("There was a problem or the file has more than 100 pages")
             setStage(0)
         });
     }

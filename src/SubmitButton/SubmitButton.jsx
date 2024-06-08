@@ -12,7 +12,7 @@ const SubmitButton = ({stage,file,setStage}) => {
         setStage(1)
         let formData = new FormData()
         formData.append("file",file) 
-        await fetch('https://pfd-chat-mntu.onrender.com/upload', {
+        await fetch('https://pdf-chat-g5tg.onrender.com/upload', {
             method: 'POST',
             body: formData
         })

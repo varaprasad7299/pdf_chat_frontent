@@ -38,7 +38,7 @@ const ChatComponent = ({setStage,setFile,filename,setFileName}) => {
 
         // get answer from server
 
-        const urlWithQueryString = `https://pfd-chat-mntu.onrender.com/ask?input=${encodeURIComponent(message)}&reference=${filename}`;
+        const urlWithQueryString = `https://pdf-chat-g5tg.onrender.com/ask?input=${encodeURIComponent(message)}&reference=${filename}`;
             await fetch(urlWithQueryString)
             .then(response => {
                 if (!response.ok) {
@@ -64,7 +64,7 @@ const ChatComponent = ({setStage,setFile,filename,setFileName}) => {
     }
    const handleClick = async()=>{
 
-    await fetch(`https://pfd-chat-mntu.onrender.com/delete?reference=${filename}`)
+    await fetch(`https://pdf-chat-g5tg.onrender.com/delete?reference=${filename}`)
     .then(response => {
         if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -94,7 +94,7 @@ const ChatComponent = ({setStage,setFile,filename,setFileName}) => {
    }
    window.addEventListener('beforeunload', async function (e) {
     // Send a request to server to delete the file
-    await fetch(`https://pfd-chat-mntu.onrender.com/delete?reference=${filename}`)
+    await fetch(`https://pdf-chat-g5tg.onrender.com/delete?reference=${filename}`)
     .then(response => {
         if (!response.ok) {
         throw new Error('Network response was not ok');

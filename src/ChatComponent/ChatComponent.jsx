@@ -48,7 +48,7 @@ const ChatComponent = ({setStage,setFile,filename,setFileName}) => {
             })
             .then(data => {
                 setTyping(false)
-                console.log(data)
+                
                 const messageFromAi = {
                     message:data,
                     sender:"AI",
